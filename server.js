@@ -11,7 +11,8 @@ const api_token = process.env.API_TOKEN;
 const unlocker_zone = process.env.WEB_UNLOCKER_ZONE || 'mcp_unlocker';
 const browser_zone = process.env.BROWSER_ZONE || 'mcp_browser';
 const pro_mode = process.env.PRO_MODE === 'true';
-const pro_mode_tools = ['search_engine', 'scrape_as_markdown'];
+const pro_mode_tools = ['search_engine', 'scrape_as_markdown', 
+    'search_engine_batch', 'scrape_batch'];
 function parse_rate_limit(rate_limit_str) {
     if (!rate_limit_str) 
         return null;
@@ -183,6 +184,100 @@ addTool({
         return response.data;
     }),
 });
+
+addTool({
+    name: 'search_engine_batch',
+    description: 'Run multiple search queries simultaneously. Returns '
+    +'JSON for Google, Markdown for Bing/Yandex.',
+    parameters: z.object({
+        queries: z.array(z.object({
+            query: z.string(),
+            engine: z.enum(['google', 'bing', 'yandex'])
+                .optional()
+                .default('google'),
+            cursor: z.string()
+                .optional(),
+        })).min(1).max(10),
+    }),
+    execute: tool_fn('search_engine_batch', async ({queries})=>{
+        const search_promises = queries.map(({query, engine, cursor})=>{
+            const is_google = (engine || 'google') === 'google';
+            const url = is_google
+                ? `${search_url(engine || 'google', query, cursor)}&brd_json=1`
+                : search_url(engine || 'google', query, cursor);
+
+            return axios({
+                url: 'https://api.brightdata.com/request',
+                method: 'POST',
+                data: {
+                    url,
+                    zone: unlocker_zone,
+                    format: 'raw',
+                    data_format: is_google ? undefined : 'markdown',
+                },
+                headers: api_headers(),
+                responseType: 'text',
+            }).then(response => {
+                if (is_google) {
+                    const search_data = JSON.parse(response.data);
+                    return {
+                        query,
+                        engine: engine || 'google',
+                        result: {
+                            organic: search_data.organic || [],
+                            images: search_data.images ? search_data.images.map(img => img.link) : [],
+                            current_page: search_data.pagination?.current_page || {},
+                            related: search_data.related || [],
+                            ai_overview: search_data.ai_overview || null
+                        }
+                    };
+                }
+                return {
+                    query,
+                    engine: engine || 'google',
+                    result: response.data
+                };
+            });
+        });
+
+        const results = await Promise.all(search_promises);
+        return JSON.stringify(results, null, 2);
+    }),
+});
+
+addTool({
+   name: 'scrape_batch',
+   description: 'Scrape multiple webpages URLs with advanced options for '
+        +'content extraction and get back the results in MarkDown language. '
+        +'This tool can unlock any webpage even if it uses bot detection or '
+        +'CAPTCHA.',
+   parameters: z.object({
+       urls: z.array(z.string().url()).min(1).max(10).describe('Array of URLs to scrape (max 10)')
+   }),
+   execute: tool_fn('scrape_batch', async ({urls})=>{
+       const scrapePromises = urls.map(url => 
+           axios({
+               url: 'https://api.brightdata.com/request',
+               method: 'POST',
+               data: {
+                   url,
+                   zone: unlocker_zone,
+                   format: 'raw',
+                   data_format: 'markdown',
+               },
+               headers: api_headers(),
+               responseType: 'text',
+           }).then(response => ({
+               url,
+               content: response.data
+           }))
+       );
+
+       const results = await Promise.all(scrapePromises);
+       return JSON.stringify(results, null, 2);
+   }),
+});
+
 addTool({
     name: 'scrape_as_html',
     description: 'Scrape a single webpage URL with advanced options for '

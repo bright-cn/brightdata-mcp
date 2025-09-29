@@ -1,0 +1,52 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+  "name": "io.github.brightdata/brightdata-mcp",
+  "description": "Bright Data's Web MCP server enabling AI agents to search, extract & navigate the web",
+  "status": "active",
+  "repository": {
+    "url": "https://github.com/brightdata/brightdata-mcp",
+    "source": "github"
+  },
+  "version": "2.5.0",
+  "packages": [
+    {
+      "registry_type": "npm",
+      "registry_base_url": "https://registry.npmjs.org",
+      "identifier": "@brightdata/mcp",
+      "version": "2.5.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environment_variables": [
+        {
+          "description": "Your API key for Bright Data",
+          "is_required": true,
+          "format": "string",
+          "is_secret": true,
+          "name": "API_TOKEN"
+        },
+        {
+          "description": "Your unlocker zone name",
+          "is_required": false,
+          "format": "string",
+          "is_secret": false,
+          "name": "WEB_UNLOCKER_ZONE"
+        },
+        {
+          "description": "Your browser zone name",
+          "is_required": false,
+          "format": "string",
+          "is_secret": false,
+          "name": "BROWSER_ZONE"
+        },
+        {
+          "description": "To enable PRO_MODE - set to true",
+          "is_required": false,
+          "format": "boolean",
+          "is_secret": false,
+          "name": "PRO_MODE"
+        }
+      ]
+    }
+  ]
+}
