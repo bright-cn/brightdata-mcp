@@ -1,43 +1,43 @@
-# MCP Usage Examples
+# MCP 使用示例
 
-A curated list of community demos using Bright Data's MCP server.
+一份精选的使用 Bright Data MCP 服务器的社区演示清单。
 
-## 🧠 Notable Examples
+## 🧠 精选示例
 
-- **AI voice agent that closed 4 deals & made $596 overnight 🤑**  
-  [📹 YouTube Demo](https://www.youtube.com/watch?v=YGzT3sVdwdY) 
+- 通过 AI 语音代理一夜之间达成 4 笔交易并赚取 $596 🤑  
+  [📹 YouTube 演示](https://www.youtube.com/watch?v=YGzT3sVdwdY) 
 
-   [💻 GitHub Repo](https://github.com/llSourcell/my_ai_intern)
+   [💻 GitHub 仓库](https://github.com/llSourcell/my_ai_intern)
 
-- **Langgraph with mcp-adapters demo**
+- 使用 mcp-adapters 的 LangGraph 演示
 
-  [📹 YouTube Demo](https://www.youtube.com/watch?v=6DXuadyaJ4g)
+  [📹 YouTube 演示](https://www.youtube.com/watch?v=6DXuadyaJ4g)
   
-  [💻 Source Code](https://github.com/techwithtim/BrightDataMCPServerAgent)
+  [💻 源码](https://github.com/techwithtim/BrightDataMCPServerAgent)
 
-- **Researcher Agent built with Google ADK that is connected to Bright Data's MCP to fetch real-time data**
+- 使用 Google ADK 构建的 Researcher Agent，并连接 Bright Data 的 MCP 获取实时数据
 
-   [📹 YouTube Demo](https://www.youtube.com/watch?v=r7WG6dXWdUI)
+   [📹 YouTube 演示](https://www.youtube.com/watch?v=r7WG6dXWdUI)
   
-  [💻Source Code](https://github.com/MeirKaD/MCP_ADK)
+  [💻 源码](https://github.com/MeirKaD/MCP_ADK)
 
-- **Replacing 3 MCP servers with our MCP server to avoid getting blocked 🤯**  
+- 用我们的 MCP 服务器替代 3 个 MCP 服务器以避免被封 🤯  
 
-  [📹 YouTube Demo](https://www.youtube.com/watch?v=0xmE0OJrNmg) 
+  [📹 YouTube 演示](https://www.youtube.com/watch?v=0xmE0OJrNmg) 
 
-- **Scrape ANY Website In Realtime With This Powerful AI MCP Server**
+- 使用这个强大的 AI MCP 服务器实时抓取任意网站
 
-   [📹 YouTube Demo](https://www.youtube.com/watch?v=bL5JIeGL3J0)
+   [📹 YouTube 演示](https://www.youtube.com/watch?v=bL5JIeGL3J0)
 
- - **Multi-Agent job finder using Bright Data MCP and TypeScript from SCRATCH**
+ - 使用 Bright Data MCP 和 TypeScript 从零构建的多智能体求职助手
 
-   [📹 YouTube Demo](https://www.youtube.com/watch?v=45OtteCGFiI)
+   [📹 YouTube 演示](https://www.youtube.com/watch?v=45OtteCGFiI)
    
-   [💻Source Code](https://github.com/bitswired/jobwizard)
+   [💻 源码](https://github.com/bitswired/jobwizard)
 
-  - **Usage example with Gemini CLI**
+  - 搭配 Gemini CLI 的使用示例
 
-    [📹 YouTube Tutorial](https://www.youtube.com/watch?v=FE1LChbgFEw)
+    [📹 YouTube 教程](https://www.youtube.com/watch?v=FE1LChbgFEw)
 ---
 
-Got a cool example? Open a PR or contact us!
+有很酷的示例？欢迎提交 PR 或联系我们！
